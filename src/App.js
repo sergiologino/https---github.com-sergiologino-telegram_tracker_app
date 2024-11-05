@@ -1,5 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useEffect } from 'react';
+import Survey from './components/Survey';
+import AdminSettings from './components/AdminSettings';
 
 function App() {
   return (
@@ -21,5 +24,18 @@ function App() {
     </div>
   );
 }
+const App = () => {
+  useEffect(() => {
+      // Инициализация Telegram Web App
+      window.Telegram.WebApp.ready();
+  }, []);
+
+  return (
+      <div>
+          <Survey />
+          <AdminSettings />
+      </div>
+  );
+};
 
 export default App;

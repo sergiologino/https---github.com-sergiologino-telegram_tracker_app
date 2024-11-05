@@ -1,0 +1,4 @@
+root:  D:\1_TelegramApp\alta-mini-track 
+path: C:\Program Files\nodejs 
+arch: 64 
+proxy: none
