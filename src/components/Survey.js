@@ -8,7 +8,27 @@ const Survey = () => {
     const [scheduledTime, setScheduledTime] = useState("");
 
     useEffect(() => {
+        const { WebApp } = window.Telegram;
+        WebApp.setHeaderColor('#4682B4'); // Синий цвет заголовка
+        WebApp.MainButton.setText('Продолжить');
+    }, []);
+
+    useEffect(() => {
         checkFirstRun();
+    }, []);
+
+    const showMainButton = () => {
+        const { MainButton } = window.Telegram.WebApp;
+        MainButton.show();
+        MainButton.onClick(() => {
+            // Ваш код для отправки данных или перехода к следующему шагу
+            MainButton.hide();
+        });
+    };
+
+// Вызов функции для отображения кнопки
+    useEffect(() => {
+        showMainButton();
     }, []);
     
     const checkFirstRun = async () => {

@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
     try {
-        await mongoose.connect('mongodb://localhost:27017/altaMiniTrack', {
+        //mongoose.connect('mongodb://username:password@host:port/database?options...');
+        await mongoose.connect('mongodb://altauser:altauser@81.200.147.214:27017/altaMiniTrack', {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
