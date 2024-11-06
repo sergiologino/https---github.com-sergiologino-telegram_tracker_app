@@ -14,9 +14,21 @@ const Survey = () => {
     const [surveyCompleted, setSurveyCompleted] = useState(false);
 
     useEffect(() => {
-        const { WebApp } = window.Telegram;
-        WebApp.setHeaderColor('#4682B4'); // Синий цвет заголовка
-        WebApp.MainButton.setText('Продолжить');
+        // Проверка на существование window.Telegram
+        if (window.Telegram && window.Telegram.WebApp) {
+            const { WebApp } = window.Telegram;
+            WebApp.setHeaderColor('#4682B4'); // Устанавливаем синий цвет заголовка
+            WebApp.MainButton.setText('Продолжить');
+
+            // Получаем данные о пользователе из Telegram WebApp
+            const user = WebApp.initDataUnsafe?.user;
+            setUsername(user?.username || "гость");
+
+            // Загружаем первый вопрос
+            startSurvey();
+        } else {
+            console.error("Telegram Web App API недоступен. Проверьте, что приложение запущено внутри Telegram.");
+        }
     }, []);
 
     useEffect(() => {
