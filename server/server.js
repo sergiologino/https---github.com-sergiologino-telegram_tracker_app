@@ -10,7 +10,7 @@ require('dotenv').config(); // Загружаем переменные окру�
 //const express = require('express');
 const axios = require('axios'); // Используется для запросов к Telegram API
 
-const app = express();
+//const app = express();
 const botToken = process.env.TELEGRAM_BOT_TOKEN; // Доступ к токену бота
 
 // Подключение к базе данных
