@@ -13,8 +13,9 @@ const App = () => {
     return (
         <div className="container">
             <div className="card">
-                <Survey />
-                <AdminSettings />
+                <h1>Приложение загружено!</h1>
+                <Survey/>
+                <AdminSettings/>
             </div>
         </div>
     );

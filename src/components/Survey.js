@@ -8,6 +8,10 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 const Survey = () => {
     const [isFirstRun, setIsFirstRun] = useState(false);
     const [scheduledTime, setScheduledTime] = useState("");
+    const [username, setUsername] = useState("");
+    const [question, setQuestion] = useState("Как прошел вчерашний день?");
+    const [answer, setAnswer] = useState("");
+    const [surveyCompleted, setSurveyCompleted] = useState(false);
 
     useEffect(() => {
         const { WebApp } = window.Telegram;
@@ -59,10 +63,7 @@ const Survey = () => {
             </div>
         );
     }
-    const [username, setUsername] = useState("");
-    const [question, setQuestion] = useState("Как прошел вчерашний день?");
-    const [answer, setAnswer] = useState("");
-    const [surveyCompleted, setSurveyCompleted] = useState(false);
+
     
     useEffect(() => {
         // Получаем данные о пользователе из Telegram
