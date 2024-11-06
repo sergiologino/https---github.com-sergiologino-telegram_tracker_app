@@ -11,7 +11,7 @@ const Auth = ({ children }) => {
 
         const checkAuthorization = async () => {
             try {
-                const response = await axios.post('/api/check-user', { username });
+                const response = await axios.post('${SERVER_URL}/api/check-user', { username });
                 setIsAuthorized(response.data.isAllowed);
             } catch (error) {
                 console.error("Ошибка проверки доступа:", error);

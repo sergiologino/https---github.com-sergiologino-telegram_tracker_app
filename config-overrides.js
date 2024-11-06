@@ -1,18 +1,28 @@
 // config-overrides.js
 
-const webpack = require("webpack");
+const webpack = require('webpack');
 
 module.exports = function override(config) {
-    config.resolve.fallback = {
-        ...config.resolve.fallback,
-        zlib: require.resolve("browserify-zlib"),
-        querystring: require.resolve("querystring-es3"),
+    config.resolve = {
+        ...config.resolve,
+        fallback: {
+            ...config.resolve.fallback,
+            buffer: require.resolve('buffer/'),
+            process: require.resolve('process/browser.js'), // Явно указано расширение .js
+        },
+        extensions: ['.js', '.jsx', '.json'], // Добавление допустимых расширений
     };
+    config.resolve.alias = {
+        ...config.resolve.alias,
+        'process/browser': require.resolve('process/browser.js'),
+    };
+
     config.plugins = (config.plugins || []).concat([
         new webpack.ProvidePlugin({
-            process: "process/browser",
-            Buffer: ["buffer", "Buffer"],
+            Buffer: ['buffer', 'Buffer'],
+            process: 'process/browser', // Прямое указание на модуль process
         }),
     ]);
+
     return config;
 };

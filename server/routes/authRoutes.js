@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const AdminSettings = require('../models/AdminSettings');
 
-router.post('/check-user', async (req, res) => {
+router.post('${SERVER_URL}/check-user', async (req, res) => {
     const { username } = req.body;
 
     try {

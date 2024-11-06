@@ -8,12 +8,12 @@ const AdminSettings = () => {
     const [newUser, setNewUser] = useState("");
 
     const fetchSettings = async () => {
-        const response = await axios.get('/api/admin-settings');
+        const response = await axios.get('${SERVER_URL}/api/admin-settings');
         setAllowedUsers(response.data.allowedUsers);
     };
 
     const addUser = async () => {
-        await axios.post('/api/admin-settings/add-user', { username: newUser });
+        await axios.post('${SERVER_URL}/api/admin-settings/add-user', { username: newUser });
         setNewUser("");
         fetchSettings();
     };

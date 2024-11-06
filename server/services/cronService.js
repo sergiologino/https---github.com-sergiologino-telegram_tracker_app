@@ -7,7 +7,7 @@ const axios = require('axios');
 // Функция для запуска опроса
 const startSurveyForUser = async (username) => {
     try {
-        await axios.post('http://localhost:3000/api/start-survey', { username });
+        await axios.post('${SERVER_URL}/api/start-survey', { username });
     } catch (error) {
         console.error(`Ошибка запуска опроса для пользователя ${username}:`, error);
     }

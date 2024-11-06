@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+
 const Survey = () => {
     const [isFirstRun, setIsFirstRun] = useState(false);
     const [scheduledTime, setScheduledTime] = useState("");
@@ -33,14 +35,14 @@ const Survey = () => {
     
     const checkFirstRun = async () => {
         const username = window.Telegram.WebApp.initDataUnsafe.user.username;
-        const response = await axios.post('/api/check-scheduled-time', { username });
+        const response = await axios.post('${SERVER_URL}/api/check-scheduled-time', { username });
         if (!response.data.scheduledTime) {
             setIsFirstRun(true);
         }
     };
     const submitTime = async () => {
         const username = window.Telegram.WebApp.initDataUnsafe.user.username;
-        await axios.post('/api/set-scheduled-time', { username, scheduledTime });
+        await axios.post('${SERVER_URL}/api/set-scheduled-time', { username, scheduledTime });
         setIsFirstRun(false);
     };
 
@@ -73,7 +75,7 @@ const Survey = () => {
 
     const startSurvey = async () => {
         try {
-            const response = await axios.post('/api/start-survey', { 
+            const response = await axios.post('${SERVER_URL}/api/start-survey', {
                 username: window.Telegram.WebApp.initDataUnsafe.user.username,
                 currentQuestion: 0 
             });
@@ -89,7 +91,7 @@ const Survey = () => {
 
     const submitAnswer = async () => {
         try {
-            await axios.post('/api/save-answer', {
+            await axios.post('${SERVER_URL}/api/save-answer', {
                 username: window.Telegram.WebApp.initDataUnsafe.user.username,
                 question,
                 answer

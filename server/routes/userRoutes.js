@@ -3,7 +3,7 @@
 const User = require('../models/User');
 const router = require('express').Router();
 
-router.post('/set-scheduled-time', async (req, res) => {
+router.post('${SERVER_URL}/set-scheduled-time', async (req, res) => {
     const { username, scheduledTime } = req.body;
 
     try {

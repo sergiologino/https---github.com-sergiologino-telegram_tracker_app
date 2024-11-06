@@ -12,7 +12,7 @@ const questions = [
 ];
 
 // Начало опроса
-router.post('/start-survey', async (req, res) => {
+router.post('${SERVER_URL}/start-survey', async (req, res) => {
     const { username } = req.body;
     const currentQuestion = req.body.currentQuestion || 0; // Текущий вопрос
 
