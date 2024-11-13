@@ -1,23 +1,17 @@
-// src/components/Survey.js
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
-
 const Survey = () => {
-    const [isFirstRun, setIsFirstRun] = useState(false);
-    const [scheduledTime, setScheduledTime] = useState("");
     const [username, setUsername] = useState("");
     const [question, setQuestion] = useState("Как прошел вчерашний день?");
     const [answer, setAnswer] = useState("");
     const [surveyCompleted, setSurveyCompleted] = useState(false);
 
     useEffect(() => {
-        // Проверка на существование window.Telegram
+        // Проверяем наличие window.Telegram и инициализируем приложение
         if (window.Telegram && window.Telegram.WebApp) {
             const { WebApp } = window.Telegram;
-            WebApp.setHeaderColor('#4682B4'); // Устанавливаем синий цвет заголовка
+            WebApp.setHeaderColor('#4682B4');
             WebApp.MainButton.setText('Продолжить');
 
             // Получаем данные о пользователе из Telegram WebApp
@@ -31,66 +25,11 @@ const Survey = () => {
         }
     }, []);
 
-    useEffect(() => {
-        checkFirstRun();
-    }, []);
-
-    const showMainButton = () => {
-        const { MainButton } = window.Telegram.WebApp;
-        MainButton.show();
-        MainButton.onClick(() => {
-            // Ваш код для отправки данных или перехода к следующему шагу
-            MainButton.hide();
-        });
-    };
-
-// Вызов функции для отображения кнопки
-    useEffect(() => {
-        showMainButton();
-    }, []);
-    
-    const checkFirstRun = async () => {
-        const username = window.Telegram.WebApp.initDataUnsafe.user.username;
-        const response = await axios.post('${SERVER_URL}/api/check-scheduled-time', { username });
-        if (!response.data.scheduledTime) {
-            setIsFirstRun(true);
-        }
-    };
-    const submitTime = async () => {
-        const username = window.Telegram.WebApp.initDataUnsafe.user.username;
-        await axios.post('${SERVER_URL}/api/set-scheduled-time', { username, scheduledTime });
-        setIsFirstRun(false);
-    };
-
-    if (isFirstRun) {
-        return (
-            <div>
-                <h3>Укажите время для ежедневного запуска опроса (формат HH:mm)</h3>
-                <input
-                    type="time"
-                    value={scheduledTime}
-                    onChange={(e) => setScheduledTime(e.target.value)}
-                />
-                <button onClick={submitTime}>Сохранить</button>
-            </div>
-        );
-    }
-
-    
-    useEffect(() => {
-        // Получаем данные о пользователе из Telegram
-        const user = window.Telegram.WebApp.initDataUnsafe?.user;
-        setUsername(user?.username || "гость");
-
-        // Загружаем первый вопрос
-        startSurvey();
-    }, []);
-
     const startSurvey = async () => {
         try {
-            const response = await axios.post('${SERVER_URL}/api/start-survey', {
+            const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/start-survey`, {
                 username: window.Telegram.WebApp.initDataUnsafe.user.username,
-                currentQuestion: 0 
+                currentQuestion: 0
             });
             if (response.data.message) {
                 setSurveyCompleted(true);
@@ -104,8 +43,8 @@ const Survey = () => {
 
     const submitAnswer = async () => {
         try {
-            await axios.post('${SERVER_URL}/api/save-answer', {
-                username: window.Telegram.WebApp.initDataUnsafe.user.username,
+            await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/save-answer`, {
+                username,
                 question,
                 answer
             });
@@ -114,26 +53,6 @@ const Survey = () => {
         } catch (error) {
             console.error("Ошибка сохранения ответа:", error);
         }
-    };
-
-    // Функция для запуска распознавания речи
-    const startVoiceRecognition = () => {
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        const recognition = new SpeechRecognition();
-        
-        recognition.lang = 'ru-RU'; // Устанавливаем русский язык
-        recognition.interimResults = false;
-
-        recognition.onresult = (event) => {
-            const transcript = event.results[0][0].transcript;
-            setAnswer(transcript); // Устанавливаем распознанный текст как ответ
-        };
-
-        recognition.onerror = (event) => {
-            console.error("Ошибка распознавания речи:", event.error);
-        };
-
-        recognition.start();
     };
 
     if (surveyCompleted) {
@@ -152,7 +71,6 @@ const Survey = () => {
                 className="input"
             />
             <button onClick={submitAnswer} className="button">Отправить</button>
-            <button onClick={startVoiceRecognition} className="button">Ответить голосом</button>
         </div>
     );
 };
