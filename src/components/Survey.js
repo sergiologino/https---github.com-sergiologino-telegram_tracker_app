@@ -46,7 +46,7 @@ const Survey = () => {
                 mainButton.textColor(); // '#ffffff'
                 mainButton.state();
                 // Получаем данные о пользователе из Telegram WebApp
-                const user = WebApp.initDataUnsafe?.user;
+                const user = WebApp.initData?.user;
                 setUsername(user?.username || "гость");
 
                 // Загружаем первый вопрос
@@ -60,7 +60,7 @@ const Survey = () => {
     const startSurvey = async () => {
         try {
             const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/start-survey`, {
-                username: window.Telegram.WebApp.initDataUnsafe.user.username,
+                username: window.Telegram.WebApp.initData.user.username,
                 currentQuestion: 0
             });
             if (response.data.message) {
