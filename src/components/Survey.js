@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { mainButton } from '@telegram-apps/sdk';
-import { initData } from '@telegram-apps/sdk';
+import { parseInitData } from '@telegram-apps/sdk';
 
-initData.restore();
+const initData = parseInitData();
 
 const Survey = () => {
     const [username, setUsername] = useState("");
