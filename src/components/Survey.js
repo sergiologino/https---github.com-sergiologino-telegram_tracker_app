@@ -9,7 +9,9 @@ const Survey = () => {
 
     useEffect(() => {
         // Проверяем наличие window.Telegram и инициализируем приложение
-        if (window.Telegram && window.Telegram.WebApp) {
+        console.log("Проверяем наличие window.Telegram и инициализируем приложение in Survey ");
+        if (window.Telegram && window.Telegram.WebView) {
+            console.log(" it's telegram app");
             const { WebApp } = window.Telegram;
             WebApp.setHeaderColor('#4682B4');
             WebApp.MainButton.setText('Продолжить');

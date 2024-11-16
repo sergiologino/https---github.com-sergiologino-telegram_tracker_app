@@ -59,7 +59,7 @@ const initializeTelegramSDK = async () => {
 
 // Инициализация SDK
 //initializeTelegramSDK();
-//init();
+init();
 
 const container = document.getElementById('root');
 const root = createRoot(container);

@@ -7,7 +7,7 @@ import './App.css';
 
 const App = () => {
     useEffect(() => {
-        window.Telegram.WebApp.ready();
+        //window.Telegram.WebView. .ready();
     }, []);
 
     return (
