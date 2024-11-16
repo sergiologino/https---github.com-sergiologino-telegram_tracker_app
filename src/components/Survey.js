@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {mainButton} from "@telegram-apps/sdk";
 
 const Survey = () => {
     const [username, setUsername] = useState("");
@@ -13,9 +14,30 @@ const Survey = () => {
         if (window.Telegram && window.Telegram.WebView) {
             console.log(" it's telegram app");
             const { WebApp } = window.Telegram;
-            WebApp.setHeaderColor('#4682B4');
-            WebApp.MainButton.setText('Продолжить');
-
+            WebApp.setHeaderColor('#777777'); // '#aabbcc'
+            //WebApp.mainButton.text('Продолжить');
+            //
+            if (mainButton.mount.isAvailable()) {
+                mainButton.mount();
+                mainButton.isMounted(); // true
+            }
+            if (WebApp.mainButton.setParams.isAvailable()) {
+                mainButton.setParams({
+                    backgroundColor: '#FFFF00',
+                    hasShineEffect: true,
+                    isEnabled: true,
+                    isLoaderVisible: true,
+                    isVisible: true,
+                    text: 'Продолжить',
+                    textColor: '#ffffff'
+                });
+                mainButton.backgroundColor(); // '#FFFF00'
+                mainButton.hasShineEffect(); // true
+                mainButton.isEnabled(); // true
+                mainButton.isLoaderVisible(); // true
+                mainButton.isVisible(); // true
+                mainButton.text(); // 'Продолжить'
+                mainButton.textColor(); // '#ffffff'
             // Получаем данные о пользователе из Telegram WebApp
             const user = WebApp.initDataUnsafe?.user;
             setUsername(user?.username || "гость");
