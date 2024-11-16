@@ -16,13 +16,12 @@ const Survey = () => {
         if (window.Telegram && window.Telegram.WebView) {
             console.log(" it's telegram app");
             const {WebApp} = window.Telegram;
-            //WebApp.setHeaderColor('#777777'); // '#aabbcc'
-            if (WebApp.setHeaderColor.isAvailable()) {
-                WebApp.setHeaderColor('#296cf2');
-                WebApp.headerColor(); // 'bg_color'
-            }
-            //WebApp.mainButton.text('Продолжить');
-            //
+
+            // if (WebApp.setHeaderColor.isAvailable()) {
+            //     WebApp.setHeaderColor('#296cf2');
+            //     WebApp.headerColor(); // 'bg_color'
+            // }
+
 
             if (mainButton.mount.isAvailable()) {
                 mainButton.mount();
