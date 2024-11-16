@@ -48,7 +48,7 @@ const Survey = () => {
                 mainButton.state();
                 // Получаем данные о пользователе из Telegram WebApp
 
-                const user = WebApp.initData?.user;
+                const user = initData?.user;
                 setUsername(user?.username || "гость");
 
                 // Загружаем первый вопрос
