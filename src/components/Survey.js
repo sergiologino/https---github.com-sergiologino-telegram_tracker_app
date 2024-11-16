@@ -29,7 +29,7 @@ const Survey = () => {
             }
             if (mainButton.setParams.isAvailable()) {
                 mainButton.setParams({
-                    backgroundColor: '#FFFF00',
+                    backgroundColor: '#296cf2',
                     hasShineEffect: true,
                     isEnabled: true,
                     isLoaderVisible: true,
