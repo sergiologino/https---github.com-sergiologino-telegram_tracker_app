@@ -13,7 +13,7 @@ const Survey = () => {
         console.log("Проверяем наличие window.Telegram и инициализируем приложение in Survey ");
         if (window.Telegram && window.Telegram.WebView) {
             console.log(" it's telegram app");
-            const { WebApp } = window.Telegram;
+            const {WebApp} = window.Telegram;
             WebApp.setHeaderColor('#777777'); // '#aabbcc'
             //WebApp.mainButton.text('Продолжить');
             //
@@ -38,16 +38,18 @@ const Survey = () => {
                 mainButton.isVisible(); // true
                 mainButton.text(); // 'Продолжить'
                 mainButton.textColor(); // '#ffffff'
-            // Получаем данные о пользователе из Telegram WebApp
-            const user = WebApp.initDataUnsafe?.user;
-            setUsername(user?.username || "гость");
+                mainButton.state();
+                // Получаем данные о пользователе из Telegram WebApp
+                const user = WebApp.initDataUnsafe?.user;
+                setUsername(user?.username || "гость");
 
-            // Загружаем первый вопрос
-            startSurvey();
-        } else {
-            console.error("Telegram Web App API недоступен. Проверьте, что приложение запущено внутри Telegram.");
-        }
-    }, []);
+                // Загружаем первый вопрос
+                startSurvey();
+            } else {
+                console.error("Telegram Web App API недоступен. Проверьте, что приложение запущено внутри Telegram.");
+            };
+        }}
+        );
 
     const startSurvey = async () => {
         try {
