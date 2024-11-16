@@ -28,7 +28,7 @@ const Survey = () => {
                 mainButton.mount();
                 mainButton.isMounted(); // true
             }
-            if (WebApp.mainButton.setParams.isAvailable()) {
+            if (mainButton.setParams.isAvailable()) {
                 mainButton.setParams({
                     backgroundColor: '#FFFF00',
                     hasShineEffect: true,
