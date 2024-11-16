@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {mainButton} from "@telegram-apps/sdk";
+import { initMainButton } from '@telegram-apps/sdk';
+
+const [mainButton] = initMainButton();
 
 const Survey = () => {
     const [username, setUsername] = useState("");
@@ -14,9 +16,14 @@ const Survey = () => {
         if (window.Telegram && window.Telegram.WebView) {
             console.log(" it's telegram app");
             const {WebApp} = window.Telegram;
-            WebApp.setHeaderColor('#777777'); // '#aabbcc'
+            //WebApp.setHeaderColor('#777777'); // '#aabbcc'
+            if (WebApp.setHeaderColor.isAvailable()) {
+                WebApp.setHeaderColor('bg_color');
+                WebApp.headerColor(); // 'bg_color'
+            }
             //WebApp.mainButton.text('Продолжить');
             //
+
             if (mainButton.mount.isAvailable()) {
                 mainButton.mount();
                 mainButton.isMounted(); // true
