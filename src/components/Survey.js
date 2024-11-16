@@ -8,7 +8,7 @@ const Survey = () => {
     const [answer, setAnswer] = useState("");
     const [surveyCompleted, setSurveyCompleted] = useState(false);
 
-    useEffect(() => {
+    useEffect(([]) => {
         // Проверяем наличие window.Telegram и инициализируем приложение
         console.log("Проверяем наличие window.Telegram и инициализируем приложение in Survey ");
         if (window.Telegram && window.Telegram.WebView) {
