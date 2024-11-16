@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { initMainButton } from '@telegram-apps/sdk';
+import { mainButton } from '@telegram-apps/sdk';
 
-const [mainButton] = initMainButton();
+
 
 const Survey = () => {
     const [username, setUsername] = useState("");
@@ -18,7 +18,7 @@ const Survey = () => {
             const {WebApp} = window.Telegram;
             //WebApp.setHeaderColor('#777777'); // '#aabbcc'
             if (WebApp.setHeaderColor.isAvailable()) {
-                WebApp.setHeaderColor('bg_color');
+                WebApp.setHeaderColor('#296cf2');
                 WebApp.headerColor(); // 'bg_color'
             }
             //WebApp.mainButton.text('Продолжить');
