@@ -7,7 +7,7 @@ const Auth = ({ children }) => {
     const [isAuthorized, setIsAuthorized] = useState(false);
 
     useEffect(() => {
-        const username = window.Telegram.WebApp.initDataUnsafe.user.username;
+        const username = window.Telegram.WebApp.initData.user.username;
 
         const checkAuthorization = async () => {
             try {

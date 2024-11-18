@@ -31,7 +31,7 @@ app.use('/api', surveyRoutes);
 app.use('/api', authRoutes);
 
 // Запуск сервера
-const PORT = process.env.PORT || 5555;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Сервер запущен на порту ${PORT}`);
 });
