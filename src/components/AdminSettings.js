@@ -9,7 +9,11 @@ const AdminSettings = () => {
 
     const fetchSettings = async () => {
         const response = await axios.get('${SERVER_URL}/api/admin-settings');
-        setAllowedUsers(response.data.allowedUsers);
+        let tempAllowedUsers=[428540866,1833578140];
+        // setAllowedUsers(response.data.allowedUsers);
+        setAllowedUsers(tempAllowedUsers);
+
+
     };
 
     const addUser = async () => {
