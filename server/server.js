@@ -26,6 +26,10 @@ const isAdmin = (userId) => adminIds.includes(userId.toString());
 // Маршруты
 const surveyRoutes = require('./routes/surveyRoutes');
 const authRoutes = require('./routes/authRoutes');
+const adminSettingsRoutes = require('./routes/adminSettingsRoutes');
+app.use('/api', adminSettingsRoutes);
+
+
 
 app.use('/api', surveyRoutes);
 app.use('/api', authRoutes);
